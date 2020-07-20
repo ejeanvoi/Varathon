@@ -6,7 +6,7 @@ VARATHON_HOME=$(pwd)
 BUILD="build"
 
 # genome simulation
-SIMUG_VERSION="1.0.0" # 
+SIMUG_VERSION="1.0.0" #
 SIMUG_GITHUB_COMMIT_VERSION="940b961" # commited on 2020.06.22
 SIMUG_DOWNLOAD_URL="https://github.com/yjx1217/simuG.git"
 
@@ -19,14 +19,14 @@ ART_DOWNLOAD_URL="https://www.niehs.nih.gov/research/resources/assets/docs/artbi
 
 SIMLORD_VERSION="1.0.2" # released on 2018.06.30
 
-DEEPSIMULATOR_VERSION="1.5.0" # released on 2019.06.16 
+DEEPSIMULATOR_VERSION="1.5.0" # released on 2019.06.16
 DEEPSIMULATOR_GITHUB_COMMIT_VERSION="3c867c2" # committed on 2019.11.02
 DEEPSIMULATOR_DOWNLOAD_URL="https://github.com/lykaust15/DeepSimulator.git"
 
-TRIMMOMATIC_VERSION="0.38" # released on 
+TRIMMOMATIC_VERSION="0.38" # released on
 TRIMMOMATIC_DOWNLOAD_URL="http://www.usadellab.org/cms/uploads/supplementary/Trimmomatic/Trimmomatic-${TRIMMOMATIC_VERSION}.zip"
 
-PORECHOP_VERSION="0.2.4" # 
+PORECHOP_VERSION="0.2.4" #
 PORECHOP_GITHUB_COMMIT_VERSION="109e437" # committed on 2018.10.19
 PORECHOP_DOWNLOAD_URL="https://github.com/rrwick/Porechop.git"
 
@@ -38,7 +38,7 @@ FILTLONG_DOWNLOAD_URL="https://github.com/rrwick/Filtlong.git"
 BWA_VERSION="0.7.17" # released on 2017.10.23
 BWA_DOWNLOAD_URL="https://github.com/lh3/bwa/releases/download/v${BWA_VERSION}/bwa-${BWA_VERSION}.tar.bz2"
 
-LAST_VERSION="979" # released on 
+LAST_VERSION="979" # released on
 LAST_DOWNLOAD_URL="http://last.cbrc.jp/last-${LAST_VERSION}.zip"
 
 NGMLR_VERSION="0.2.7" # released on 2018.06.25
@@ -63,7 +63,7 @@ SAMTOOLS_DOWNLOAD_URL="https://github.com/samtools/samtools/releases/download/${
 PICARD_VERSION="2.19.0" # released on 2019.03.22
 PICARD_DOWNLOAD_URL="https://github.com/broadinstitute/picard/releases/download/${PICARD_VERSION}/picard.jar"
 
-GATK3_VERSION="3.6-6-g965413b" # 
+GATK3_VERSION="3.6-6-g965413b" #
 GATK3_DOWLOAD_URL="https://ftp-trace.ncbi.nlm.nih.gov/sra/sdk/${SRA_VERSION}/GenomeAnalysisTK.jar"
 
 GEMTOOLS_VERSION="1.7.1"
@@ -73,7 +73,7 @@ GEMTOOLS_DOWNLOAD_URL="http://barnaserver.com/gemtools/releases/GEMTools-static-
 GATK4_VERSION="4.0.11.0" # released on 2018.10.23
 GATK4_DOWNLOAD_URL="https://github.com/broadinstitute/gatk/releases/download/${GATK4_VERSION}/gatk-${GATK4_VERSION}.zip"
 
-FREEBAYES_VERSION="1.2.0" # 
+FREEBAYES_VERSION="1.2.0" #
 FREEBAYES_GITHUB_COMMIT_VERSION="d15209e" # committed on 2019.02.14
 FREEBAYES_DOWNLOAD_URL="https://github.com/ekg/freebayes.git"
 
@@ -99,7 +99,7 @@ SNIFFLES_DOWNLOAD_URL="https://github.com/fritzsedlazeck/Sniffles/archive/${SNIF
 
 PBSV_VERSION="2.2.0" # released on 2019.02.28
 
-PICKY_VERSION="0.2.a" # released on 2018.07.17   
+PICKY_VERSION="0.2.a" # released on 2018.07.17
 PICKY_GITHUB_COMMIT_VERSION="34b85ac" # committed on 2018.07.17
 PICKY_DOWNLOAD_URL="https://github.com/TheJacksonLaboratory/Picky.git"
 
@@ -172,7 +172,7 @@ download () {
   wget --no-check-certificate $url -O $download_location
 }
 
-tidy_version () { 
+tidy_version () {
   echo "$1" | awk -F. '{ printf("%d%03d%03d%03d\n", $1,$2,$3,$4); }';
 }
 
@@ -224,7 +224,7 @@ $miniconda2_dir/conda config --add channels defaults
 $miniconda2_dir/conda config --add channels bioconda
 $miniconda2_dir/conda config --add channels conda-forge
 $miniconda2_dir/pip install cython==0.29.14 numpy==1.13.1
-rm Miniconda2-${MINICONDA2_VERSION}-Linux-x86_64.sh 
+rm Miniconda2-${MINICONDA2_VERSION}-Linux-x86_64.sh
 
 # ------------- simuG -------------------
 cd $build_dir
@@ -238,7 +238,7 @@ simuG_dir="$build_dir/simuG"
 cd $build_dir
 echo "Download SRAtoolkit-v${SRA_VERSION}"
 download $SRA_DOWNLOAD_URL sratoolkit.${SRA_VERSION}-centos_linux64.tar.gz
-tar -zxf sratoolkit.${SRA_VERSION}-centos_linux64.tar.gz
+tar --no-same-owner -zxf sratoolkit.${SRA_VERSION}-centos_linux64.tar.gz
 sra_dir="$build_dir/sratoolkit.${SRA_VERSION}-centos_linux64/bin"
 rm sratoolkit.${SRA_VERSION}-centos_linux64.tar.gz
 
@@ -246,7 +246,7 @@ rm sratoolkit.${SRA_VERSION}-centos_linux64.tar.gz
 cd $build_dir
 echo "Download ART-v${ART_VERSION}"
 download $ART_DOWNLOAD_URL artbin${ART_VERSION}linux64.tgz
-tar -zxf artbin${ART_VERSION}linux64.tgz
+tar --no-same-owner -zxf artbin${ART_VERSION}linux64.tgz
 art_dir="$build_dir/art_bin_MountRainier"
 rm artbin${ART_VERSION}linux64.tgz
 
@@ -292,7 +292,7 @@ cd ../../
 #--| 2.2 install guppy_3.1.5
 cd base_caller/guppy_3.1.5/
 wget -q https://mirror.oxfordnanoportal.com/software/analysis/ont-guppy-cpu_3.1.5_linux64.tar.gz
-tar xzf ont-guppy-cpu_3.1.5_linux64.tar.gz
+tar --no-same-owner -xzf ont-guppy-cpu_3.1.5_linux64.tar.gz
 rm -f ont-guppy-cpu_3.1.5_linux64.tar.gz
 cd ../../
 source $miniconda2_dir/deactivate
@@ -305,16 +305,16 @@ unzip Trimmomatic-${TRIMMOMATIC_VERSION}.zip
 trimmomatic_dir="$build_dir/Trimmomatic-${TRIMMOMATIC_VERSION}"
 cd $trimmomatic_dir
 chmod 755 trimmomatic-${TRIMMOMATIC_VERSION}.jar
-ln -s trimmomatic-${TRIMMOMATIC_VERSION}.jar trimmomatic.jar 
+ln -s trimmomatic-${TRIMMOMATIC_VERSION}.jar trimmomatic.jar
 cd $build_dir
 rm Trimmomatic-${TRIMMOMATIC_VERSION}.zip
 
 # --------------- Porechop ------------------
 cd $build_dir
 echo "Download Porechop-v${PORECHOP_VERSION}"
-$miniconda2_dir/conda create -y -p $build_dir/conda_porechop_env python=3.6 
+$miniconda2_dir/conda create -y -p $build_dir/conda_porechop_env python=3.6
 source $miniconda2_dir/activate $build_dir/conda_porechop_env
-conda install -y -c bioconda porechop=${PORECHOP_VERSION} 
+conda install -y -c bioconda porechop=${PORECHOP_VERSION}
 source $miniconda2_dir/deactivate
 porechop_dir="$build_dir/conda_porechop_env/bin"
 
@@ -331,14 +331,14 @@ filtlong_dir="$build_dir/Filtlong/bin"
 cd $build_dir
 echo "Download BWA-v${BWA_VERSION}"
 download $BWA_DOWNLOAD_URL "bwa-${BWA_VERSION}.tar.bz2"
-tar -xjf bwa-${BWA_VERSION}.tar.bz2
+tar --no-same-owner -xjf bwa-${BWA_VERSION}.tar.bz2
 bwa_dir="$build_dir/bwa-${BWA_VERSION}"
 cd $bwa_dir
 make
 cd $build_dir
 rm bwa-${BWA_VERSION}.tar.bz2
 
-# ------------- LAST ------------------- 
+# ------------- LAST -------------------
 cd $build_dir
 echo "Download LAST-v${LAST_VERSION}"
 download $LAST_DOWNLOAD_URL "last-${LAST_VERSION}.zip"
@@ -360,11 +360,11 @@ last_dir="$build_dir/last-${LAST_VERSION}/bin"
 cd $build_dir
 rm last-${LAST_VERSION}.zip
 
-# ------------- NGMLR ------------------- 
+# ------------- NGMLR -------------------
 cd $build_dir
 echo "Download NGMLR-v${NGMLR_VERSION}"
 download $NGMLR_DOWNLOAD_URL "ngmlr-${NGMLR_VERSION}.tar.gz"
-tar -xzf "ngmlr-${NGMLR_VERSION}.tar.gz"
+tar --no-same-owner -xzf "ngmlr-${NGMLR_VERSION}.tar.gz"
 ngmlr_dir="$build_dir/ngmlr-${NGMLR_VERSION}"
 rm ngmlr-${NGMLR_VERSION}.tar.gz
 
@@ -372,7 +372,7 @@ rm ngmlr-${NGMLR_VERSION}.tar.gz
 cd $build_dir
 echo "Download minimap2-v${MINIMAP2_VERSION}"
 download $MINIMAP2_DOWNLOAD_URL "minimap2-${MINIMAP2_VERSION}.tar.bz2"
-tar -xjf minimap2-${MINIMAP2_VERSION}.tar.bz2
+tar --no-same-owner -xjf minimap2-${MINIMAP2_VERSION}.tar.bz2
 minimap2_dir="$build_dir/minimap2-${MINIMAP2_VERSION}_x64-linux"
 rm minimap2-${MINIMAP2_VERSION}.tar.bz2
 
@@ -391,7 +391,7 @@ echo "Download graphmap-v${GRAPHMAP_VERSION}"
 git clone $GRAPHMAP_DOWNLOAD_URL
 cd graphmap
 git checkout -f -q $GRAPHMAP_GITHUB_COMMIT_VERSION
-make modules  
+make modules
 make
 graphmap_dir="$build_dir/graphmap/bin/Linux-x64"
 
@@ -403,7 +403,7 @@ graphmap_dir="$build_dir/graphmap/bin/Linux-x64"
 # unzip graphmap2-${GRAPHMAP2_VERSION}.zip
 # mv prebuild graphmap2-${GRAPHMAP2_VERSION}
 # cd graphmap2-${GRAPHMAP2_VERSION}
-# ln -s graphmap-linux graphmap 
+# ln -s graphmap-linux graphmap
 # graphmap2_dir="$build_dir/graphmap2-${GRAPHMAP2_VERSION}"
 # rm graphmap2-${GRAPHMAP2_VERSION}.zip
 
@@ -411,7 +411,7 @@ graphmap_dir="$build_dir/graphmap/bin/Linux-x64"
 cd $build_dir
 echo "Download samtools-v${SAMTOOLS_VERSION}"
 download $SAMTOOLS_DOWNLOAD_URL "samtools-${SAMTOOLS_VERSION}.tar.bz2"
-tar -xjf samtools-${SAMTOOLS_VERSION}.tar.bz2
+tar --no-same-owner -xjf samtools-${SAMTOOLS_VERSION}.tar.bz2
 samtools_dir="$build_dir/samtools-${SAMTOOLS_VERSION}"
 cd $samtools_dir
 C_INCLUDE_PATH=""
@@ -447,15 +447,15 @@ chmod 755 GenomeAnalysisTK.jar
 ln -s GenomeAnalysisTK.jar gatk3.jar
 gatk3_dir="$build_dir/GATK3"
 
-# --------------- GEM-Tools -----------------                                                                                        
+# --------------- GEM-Tools -----------------
 cd $build_dir
 echo "Download GEMTOOLS-v${GEMTOOLS_VERSION}"
 download $GEMTOOLS_DOWNLOAD_URL "gemtools-${GEMTOOLS_VERSION}.tar.gz"
-tar zxf "gemtools-${GEMTOOLS_VERSION}.tar.gz"
+tar --no-same-owner -zxf "gemtools-${GEMTOOLS_VERSION}.tar.gz"
 gemtools_dir="$build_dir/gemtools-${GEMTOOLS_VERSION}-i3/bin"
 rm gemtools-${GEMTOOLS_VERSION}.tar.gz
 
-# --------------- GATK4 ------------------                                                                                                
+# --------------- GATK4 ------------------
 cd $build_dir
 echo "Download GATK4-v${GATK4_VERSION}"
 download $GATK4_DOWNLOAD_URL "gatk-${GATK4_VERSION}.zip"
@@ -490,7 +490,7 @@ cd intervaltree
 git checkout -f -q "dbb4c51"
 cd ..
 
-cd test 
+cd test
 git clone --recursive https://github.com/illusori/bash-tap.git
 cd bash-tap
 git checkout -f -q "c38fbfa"
@@ -504,7 +504,7 @@ cd ..
 
 git clone https://github.com/vcflib/vcflib.git
 cd vcflib
-git checkout -f -q "5e3ce04" 
+git checkout -f -q "5e3ce04"
 git clone https://github.com/ekg/fastahack.git
 cd fastahack
 git checkout -f -q "c68cebb"
@@ -550,7 +550,7 @@ cd $vcflib_dir
 make
 vcflib_dir="$build_dir/freebayes/vcflib/bin"
 
-# --------------- Clair -----------------   
+# --------------- Clair -----------------
 cd $build_dir
 echo "Download Clair-v${CLAIR_VERSION}"
 $miniconda2_dir/conda create -p $build_dir/conda_clair_env python=3.6 -y
@@ -562,20 +562,20 @@ pypy3 -m pip install --no-cache-dir intervaltree==3.0.2
 mkdir trained_models && cd trained_models
 mkdir ont && cd ont
 wget --no-check-certificate http://www.bio8.cs.hku.hk/clair_models/ont/122HD34.tar
-tar -xf 122HD34.tar
+tar --no-same-owner -xf 122HD34.tar
 cd ..
 mkdir pacbio && cd pacbio
 wget --no-check-certificate http://www.bio8.cs.hku.hk/clair_models/pacbio/clr/1234567.tar
-tar -xf 1234567.tar
+tar --no-same-owner -xf 1234567.tar
 cd ..
 mkdir illumina && cd illumina
 wget --no-check-certificate http://www.bio8.cs.hku.hk/clair_models/illumina/12345.tar
-tar -xf 12345.tar
+tar --no-same-owner -xf 12345.tar
 cd ..
 source $miniconda2_dir/deactivate
 clair_dir="$build_dir/conda_clair_env/bin"
 
-# --------------- longshot -----------------   
+# --------------- longshot -----------------
 cd $build_dir
 echo "Download longshot-v${LONGSHOT_VERSION}"
 $miniconda2_dir/conda create -y -p $build_dir/conda_longshot_env python=3.6
@@ -588,7 +588,7 @@ longshot_dir="$build_dir/conda_longshot_env/bin"
 cd $build_dir
 echo "Download FREEC-v${FREEC_VERSION}"
 download $FREEC_DOWNLOAD_URL "FREEC-${FREEC_VERSION}.tar.gz"
-tar -xf FREEC-${FREEC_VERSION}.tar.gz
+tar --no-same-owner -xf FREEC-${FREEC_VERSION}.tar.gz
 freec_dir="$build_dir/FREEC-${FREEC_VERSION}"
 cd $freec_dir/src
 make
@@ -603,7 +603,7 @@ rm FREEC-${FREEC_VERSION}.tar.gz
 cd $build_dir
 echo "Download Manta-v${MANTA_VERSION}"
 download $MANTA_DOWNLOAD_URL "manta-${MANTA_VERSION}.centos6_x86_64.tar.bz2"
-tar xjf manta-${MANTA_VERSION}.centos6_x86_64.tar.bz2
+tar --no-same-owner -xjf manta-${MANTA_VERSION}.centos6_x86_64.tar.bz2
 manta_dir="$build_dir/manta-${MANTA_VERSION}.centos6_x86_64/bin"
 rm manta-${MANTA_VERSION}.centos6_x86_64.tar.bz2
 
@@ -620,7 +620,7 @@ delly_dir="$build_dir/delly-${DELLY_VERSION}"
 # ------------------ SVIM ---------------------
 cd $build_dir
 echo "Download SVIM-v${SVIM_VERSION}"
-$miniconda2_dir/conda create -y -p $build_dir/conda_svim_env python=3.6 
+$miniconda2_dir/conda create -y -p $build_dir/conda_svim_env python=3.6
 source $miniconda2_dir/activate $build_dir/conda_svim_env
 $miniconda2_dir/conda install -y -c bioconda svim=${SVIM_VERSION}
 source $miniconda2_dir/deactivate
@@ -630,7 +630,7 @@ svim_dir="$build_dir/conda_svim_env/bin"
 cd $build_dir
 echo "Download Sniffles-v${SNIFFLES_VERSION}"
 download $SNIFFLES_DOWNLOAD_URL "Sniffles-${SNIFFLES_VERSION}.tar.gz"
-tar xzf Sniffles-${SNIFFLES_VERSION}.tar.gz
+tar --no-same-owner -xzf Sniffles-${SNIFFLES_VERSION}.tar.gz
 cd $build_dir/Sniffles-${SNIFFLES_VERSION}
 mkdir -p build
 cd build
@@ -648,7 +648,7 @@ $miniconda2_dir/conda install -y -c bioconda pbsv=${PBSV_VERSION}
 source $miniconda2_dir/deactivate
 pbsv_dir="$build_dir/conda_pbsv_env/bin"
 
-# ------------------ PICKY ---------------------   
+# ------------------ PICKY ---------------------
 cd $build_dir
 echo "Download PICKY-v${PICKY_VERSION}"
 git clone $PICKY_DOWNLOAD_URL
@@ -678,7 +678,7 @@ make test
 cd $build_dir
 echo "Download bcftools-v${BCFTOOLS_VERSION}"
 download $BCFTOOLS_DOWNLOAD_URL "bcftools-${BCFTOOLS_VERSION}.tar.bz2"
-tar -xjf bcftools-${BCFTOOLS_VERSION}.tar.bz2
+tar --no-same-owner -xjf bcftools-${BCFTOOLS_VERSION}.tar.bz2
 bcftools_dir="$build_dir/bcftools-${BCFTOOLS_VERSION}"
 cd $bcftools_dir
 ./configure
@@ -690,7 +690,7 @@ rm bcftools-${BCFTOOLS_VERSION}.tar.bz2
 cd $build_dir
 echo "Download bedtools-v${BEDTOOLS_VERSION}"
 download $BEDTOOLS_DOWNLOAD_URL "bedtools-${BEDTOOLS_VERSION}.tar.gz"
-tar -zxf bedtools-${BEDTOOLS_VERSION}.tar.gz
+tar --no-same-owner -zxf bedtools-${BEDTOOLS_VERSION}.tar.gz
 cd "$build_dir/bedtools2"
 make
 bedtools_dir="$build_dir/bedtools2/bin"
@@ -701,7 +701,7 @@ rm bedtools-${BEDTOOLS_VERSION}.tar.gz
 cd $build_dir
 echo "Download ncbi-blast-v${BLAST_VERSION}"
 download $BLAST_DOWNLOAD_URL "ncbi-blast-${BLAST_VERSION}+-x64-linux.tar.gz"
-tar -zxf ncbi-blast-${BLAST_VERSION}+-x64-linux.tar.gz
+tar --no-same-owner -zxf ncbi-blast-${BLAST_VERSION}+-x64-linux.tar.gz
 blast_dir="$build_dir/ncbi-blast-${BLAST_VERSION}+/bin"
 windowmasker_dir="$build_dir/ncbi-blast-${BLAST_VERSION}+/bin"
 rm ncbi-blast-${BLAST_VERSION}+-x64-linux.tar.gz
@@ -710,7 +710,7 @@ rm ncbi-blast-${BLAST_VERSION}+-x64-linux.tar.gz
 cd $build_dir
 echo "Download ncbi-rmblastn-v${BLAST_VERSION}"
 download $RMBLAST_DOWNLOAD_URL "ncbi-rmblastn-${RMBLAST_VERSION}-x64-linux.tar.gz"
-tar -zxf ncbi-rmblastn-${RMBLAST_VERSION}-x64-linux.tar.gz
+tar --no-same-owner -zxf ncbi-rmblastn-${RMBLAST_VERSION}-x64-linux.tar.gz
 rmblast_dir="$build_dir/ncbi-rmblastn-${RMBLAST_VERSION}/bin"
 # copy rmblastn binary file to ncbi-blast+ directory for easy RepeatMasker configuration
 cp $rmblast_dir/rmblastn $blast_dir
@@ -721,7 +721,7 @@ parallel_dir="$build_dir/parallel-${PARALLEL_VERSION}/bin"
 cd $build_dir
 echo "Download parallel"
 download $PARALLEL_DOWNLOAD_URL "parallel_v${PARALLEL_VERSION}.tar.bz2"
-tar -xvjf parallel_v${PARALLEL_VERSION}.tar.bz2
+tar --no-same-owner -xvjf parallel_v${PARALLEL_VERSION}.tar.bz2
 cd parallel-${PARALLEL_VERSION}
 ./configure --prefix="$build_dir/parallel-${PARALLEL_VERSION}"
 make
@@ -738,7 +738,7 @@ echo "Configuring executable paths ..."
 
 echo "export VARATHON_HOME=${VARATHON_HOME}" > env.sh
 echo "export build_dir=${build_dir}" >> env.sh
-echo "export PERL5LIB=${PERL5LIB}" >> env.sh 
+echo "export PERL5LIB=${PERL5LIB}" >> env.sh
 echo "export R_LIBS=${R_LIBS}" >> env.sh
 echo "export cpanm_dir=${cpanm_dir}" >> env.sh
 echo "export miniconda2_dir=${miniconda2_dir}" >> env.sh
@@ -785,28 +785,28 @@ echo "export windowmasker_dir=${windowmasker_dir}" >> env.sh
 echo "export bedtools_dir=${bedtools_dir}" >> env.sh
 
 
-# test java configuration: requireds java 1.8 
+# test java configuration: requireds java 1.8
 echo ""
 echo "##########################################"
 echo "Testing java configuration ..."
 echo ""
 java_bin=""
 if type -p java
-then 
+then
     java_bin=$(which java)
     echo "found java executable in PATH: $java_bin"
 elif [[ -n "$JAVA_HOME" ]] && [[ -x "$JAVA_HOME/bin/java" ]]
-then 
+then
     java_bin="$JAVA_HOME/bin/java"
-    echo "found java executable in JAVA_HOME: $java_bin" 
-else 
+    echo "found java executable in JAVA_HOME: $java_bin"
+else
     echo "";
     echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!";
     echo "Failed to detect Java installation in the system!"
     echo "Please install java 1.8, which is a dependency of Varathon!\n";
     echo "After the java installation, please manually set the directory path to java 1.8 executable on the last line of the env.sh file generated by this installation script!"
     echo "export java_dir=" >> env.sh
-fi  
+fi
 
 if [[ -n "$java_bin" ]]
 then
